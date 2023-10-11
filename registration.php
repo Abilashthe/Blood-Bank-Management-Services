@@ -145,14 +145,12 @@ if (isset($_POST['register'])) {
     $db_password = "";
     $dbname = "bloodbank";
 
-    // Create a database connection
     $conn = new mysqli($servername, $db_username, $db_password, $dbname);
 
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // Retrieve user input from the registration form
     $name = $_POST['name'];
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -164,18 +162,13 @@ if (isset($_POST['register'])) {
     $district = $_POST['district'];
     $blood_group = $_POST['blood_group'];
 
-    
-
-    // Perform SQL insertion without bind_param
     $sql = "INSERT INTO donor (username, password, Name, Age, `Aadhar No`, `Email ID`, District, State, `Blood Group`, `phone no`)
             VALUES ('$username', '$password', '$name', $age, '$aadhar', '$email', '$district', '$state', '$blood_group', '$phone')";
 
     if ($conn->query($sql) === TRUE) {
-        // Registration successful
         echo "<script>alert('Registered successfully'); window.location.href='https://localhost/donorlogin.php';</script>";
 
     } else {
-        // Registration failed
         echo "Error: " . $conn->error;
     }
 
