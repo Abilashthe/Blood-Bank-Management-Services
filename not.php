@@ -80,17 +80,13 @@
 <body>
     <div class="container">
         <h1>Blood Bank Camp</h1>
-
-        <!-- Add a container for notifications -->
         <div class="notification-container">
-            <!-- Add a div to display notifications -->
+        
             <button class="notification-button" id="notificationButton">Notifications
                 <span class="notification-badge" id="notificationBadge">0</span>
             </button>
             <div class="notification-content" id="notificationContent"></div>
         </div>
-
-        <!-- Your existing content here -->
     </div>
 
 <script>
@@ -98,11 +94,8 @@
     const notificationContent = document.getElementById('notificationContent');
     const notificationBadge = document.getElementById('notificationBadge');
 
-    // ...
 
-    let notificationCount = 0; // Initialize the notification count
-
-    // Fetch and initialize the notification count when the page loads
+    let notificationCount = 0; 
     fetch('https://localhost/notification.php')
         .then(response => response.json())
         .then(data => {
@@ -117,36 +110,31 @@
         } else {
             notificationContent.style.display = 'block';
 
-            // Fetch notifications from the server using AJAX (in this case, PHP)
             fetch('https://localhost/notification.php')
                 .then(response => response.json())
                 .then(data => {
                     const notifications = data;
 
-                    // Update notification count with the number of new notifications
                     notificationCount = notifications.length;
                     notificationBadge.innerText = notificationCount.toString();
 
-                    // Display notifications in the notificationContent div
                     displayNotifications(notifications);
                 });
         }
 
-        // Reset notification count to zero when the button is clicked
         notificationCount = 0;
         notificationBadge.innerText = '0';
     });
 
     function displayNotifications(notifications) {
-        // Clear previous notifications
+
         notificationContent.innerHTML = '';
 
         if (notifications.length === 0) {
-            // If there are no notifications, display a message
+            
             notificationContent.innerHTML = '<p>No new notifications.</p>';
         } else {
-            // Create an ordered list to display notifications
-            const notificationList = document.createElement('ol'); // Use <ol> for ordered list
+            const notificationList = document.createElement('ol'); 
             notifications.forEach(notification => {
                 const listItem = document.createElement('li');
                 listItem.textContent = notification;
