@@ -109,20 +109,16 @@ if (isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Database connection parameters
     $servername = "localhost";
     $db_username = "root";
     $db_password = "";
     $dbname = "bloodbank";
 
-    // Create a database connection
     $conn = new mysqli($servername, $db_username, $db_password, $dbname);
 
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-
-    // Prepare and execute the SQL query
     $query = "SELECT username, password FROM donor WHERE username = '$username'";
     $result = $conn->query($query);
 
@@ -130,7 +126,6 @@ if (isset($_POST['login'])) {
         $row = $result->fetch_assoc();
         $stored_password = $row['password'];
         
-        // Verify the password
         if ($password === $stored_password) {
             echo "<script>alert('Login successfully'); window.location.href='https://localhost/donorpage.html';</script>";
             exit(); // Exit to prevent further execution
