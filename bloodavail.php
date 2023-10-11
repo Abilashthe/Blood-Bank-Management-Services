@@ -107,33 +107,25 @@
         <input type="submit" name="submit" value="Search">
     </form>
 <?php
-// Check if the form is submitted
 if (isset($_POST['submit'])) {
     // Database connection parameters
     $servername = "localhost";
     $username = "root";
     $password = "";
     $dbname = "bloodbank";
-
-    // Create a database connection
     $conn = new mysqli($servername, $username, $password, $dbname);
 
-    // Check connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // Retrieve data based on selected blood group
     $blood_group = $_POST['blood_group'];
     $sql = "SELECT hospitals.hname,hospitals.hemail,hospitals.hphone,hospitals.location,bloodinfo.bid,bloodinfo.bg,bloodinfo.Available FROM `hospitals` INNER JOIN bloodinfo ON bloodinfo.hid=hospitals.hid  WHERE bg= '$blood_group'";
     $result = $conn->query($sql);
-
-    // Check for SQL query errors
     if (!$result) {
         die("Query failed: " . $conn->error);
     }
 
-    // Display the results in a table
     if ($result->num_rows > 0) {
         echo "<h2>Results for Blood Group: $blood_group</h2>";
         echo "<table border='1'>";
@@ -154,8 +146,6 @@ if (isset($_POST['submit'])) {
     } else {
         echo "<p>No results found for Blood Group: $blood_group</p>";
     }
-
-    // Close the database connection
     $conn->close();
 }
 ?>
