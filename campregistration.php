@@ -115,20 +115,17 @@
 
 <?php
 if (isset($_POST['register'])) {
-    // Database connection parameters
+    
     $servername = "localhost";
     $db_username = "root";
     $db_password = "";
     $dbname = "bloodbank";
 
-    // Create a database connection
     $conn = new mysqli($servername, $db_username, $db_password, $dbname);
-
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // Retrieve user input from the registration form
     $campname = $_POST['campname'];
     $time = $_POST['time'];
     $date = $_POST['date'];
@@ -140,16 +137,12 @@ if (isset($_POST['register'])) {
 
     $insertsql = "INSERT INTO `bloodbankcamp` (`Name of the Association`, `Email ID`, `phone no`, District, State, date, venue, time)
                 VALUES ('$campname', '$email', '$phone', '$district', '$state', '$date', '$venue', '$time')";
-    
-    // Perform the insert query
    if ($conn->query($insertsql)) {
    
     echo "<script>alert('Registered successfully'); window.location.href='https://localhost/campsearch.php';</script>";
     } 
-
-
      else {
-        // Registration failed
+        
         echo "Error: " . $conn->error;
     }
 
