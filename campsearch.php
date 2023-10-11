@@ -102,7 +102,6 @@
 <?php
 
 if (isset($_POST['submit'])) {
-    // Database connection parameters
     $servername = "localhost";
     $username = "root";
     $password = "";
@@ -149,8 +148,6 @@ if (isset($_POST['submit'])) {
     } else {
         echo "<p>No results found for Blood Donation Camp on $search_date</p>";
     }
-
-    // Close the database connection
     $conn->close();
 }
 ?>
