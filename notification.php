@@ -13,7 +13,7 @@ if ($conn->connect_error) {
 $sql = 'SELECT `Name of the Association`, date, venue, time FROM bloodbankcamp';
 $result = $conn->query($sql);
 
-$notifications = array(); // Initialize an array to store notifications
+$notifications = array();
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
@@ -24,10 +24,8 @@ if ($result->num_rows > 0) {
     }
 }
 
-// Encode the notifications as JSON
 $notificationsJson = json_encode($notifications);
 
-// Output JSON
 header('Content-Type: application/json');
 echo $notificationsJson;
 ?>
